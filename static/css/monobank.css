@@ -1,0 +1,18 @@
+h1 {
+    color: #FFD600;
+}
+
+button {
+    background-color: #FFD600;
+    color: #1A1A1A;
+}
+
+button:hover {
+    background-color: #FFC107;
+}
+
+.container {
+    background-color: #2C2C2C;
+    color: #FFD600;
+    border: 1px solid #444;
+}

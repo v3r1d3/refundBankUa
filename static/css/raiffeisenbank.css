@@ -1,0 +1,17 @@
+h1 {
+    color: #FFD700;
+}
+
+button {
+    background-color: #FFD700;
+    color: #000;
+}
+
+button:hover {
+    background-color: #FFC107;
+}
+
+.container {
+    background-color: #fff;
+    border: 1px solid #FFD700;
+}
